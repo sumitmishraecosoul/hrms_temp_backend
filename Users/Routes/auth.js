@@ -11,7 +11,7 @@ const router = express.Router();
  *     tags:
  *       - Auth
  *     summary: Register a new user
- *     description: Register a new user with the given name, email, and password
+ *     description: Register a new user with the given email, and password
  *     requestBody:
  *       required: true
  *       content:
@@ -19,14 +19,9 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - name
  *               - email
  *               - password
  *             properties:
- *               name:
- *                 type: string
- *                 description: The name of the user
- *                 example: "John Doe"
  *               email:
  *                 type: string
  *                 format: email

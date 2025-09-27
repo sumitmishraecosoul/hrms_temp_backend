@@ -3,15 +3,17 @@ import dotenv from "dotenv";
 import setupSwagger from "./swagger.js";
 import All_Models from "./Utils/All_Models.js";
 import All_User_Routes from "./Utils/All_User_Routes.js";
-import dbConnection from "./Utils/dbConnection.js"
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import sequelize from "./Utils/dbConnection.js";
+import cors from "cors";
+
+
 
 dotenv.config();
 
 
 const app = express();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -19,8 +21,13 @@ app.use(fileUpload());
 
 const PORT = process.env.PORT || 5010;
 
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}));
+
+
 All_Models;
-dbConnection()
 
 
 All_User_Routes(app);
@@ -30,6 +37,12 @@ app.get("/", (req, res) => {
 });
 
 setupSwagger(app);
+
+sequelize.sync().then(() => {
+    console.log('Database & tables created!');
+}).catch((error) => {
+    console.error('Unable to create table : ', error);
+});
 
 app.listen(PORT, () => {
     try {

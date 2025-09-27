@@ -9,9 +9,9 @@ const authController = {}
 
 authController.Register_User = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { email, password } = req.body;
 
-        const existingUser = await All_Models.User.findOne({ email });
+        const existingUser = await All_Models.User.findOne({ where: { email } });
 
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists. Please Login' });
@@ -20,14 +20,13 @@ authController.Register_User = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = await All_Models.User.create({
-            name,
             email,
             password: hashedPassword
         });
 
         const accessTokenHRMS = jwt.sign(
             {
-                id: newUser._id,
+                id: newUser.id,
                 email: newUser.email
             },
             process.env.JWT_ACCESS_SECRET,
@@ -38,7 +37,7 @@ authController.Register_User = async (req, res) => {
 
         const refreshTokenHRMS = jwt.sign(
             {
-                id: newUser._id,
+                id: newUser.id,
                 email: newUser.email
             },
             process.env.JWT_REFRESH_SECRET,
@@ -81,7 +80,7 @@ authController.Login_User = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await All_Models.User.findOne({ email });
+        const user = await All_Models.User.findOne({ where: { email } });
 
         if (!user) {
             return res.status(401).json({ message: "Invalid credentials" });
@@ -95,7 +94,7 @@ authController.Login_User = async (req, res) => {
 
         const accessTokenHRMS = jwt.sign(
             {
-                id: user._id,
+                id: user.id,
                 email: user.email
             },
             process.env.JWT_ACCESS_SECRET,
@@ -106,7 +105,7 @@ authController.Login_User = async (req, res) => {
 
         const refreshTokenHRMS = jwt.sign(
             {
-                id: user._id,
+                id: user.id,
                 email: user.email
             },
             process.env.JWT_REFRESH_SECRET,

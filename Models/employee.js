@@ -1,44 +1,42 @@
-import mongoose from 'mongoose';
+import { DataTypes } from 'sequelize';
+import sequelize from '../Utils/dbConnection.js';
 
-const employeeSchema = new mongoose.Schema({
-    employeeId:{
-        type: String,
-        required: true,
-        unique: true,
-    },
+const employee = sequelize.define('employee', {
     name: {
-        type: String,
-        required: true,
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true,
+        type: DataTypes.STRING,
+        allowNull: false,
     },
-    department:{
-        type: String,
-        enum: ['IT', 'HR', 'Finance', 'Marketing', 'Sales', 'Engineering', 'Customer Support', 'Legal', 'Product', 'Design', 'Operations'],
-        required: true,
+    department: {
+        type: DataTypes.ENUM,
+        values: ['IT', 'HR', 'Finance', 'Marketing', 'Sales', 'Engineering', 'Customer Support', 'Legal', 'Product', 'Design', 'Operations'],
+        allowNull: false,
     },
-    designation:{
-        type: String,
-        required: true,
+    designation: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
-    dateOfJoining:{
-        type: Date,
-        required: true,
+    dateOfJoining: {
+        type: DataTypes.DATE,
+        allowNull: false,
     },
-    biometricId:{
-        type: String,
-        required: true,
-        unique: true,
+    biometricId: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
-    gender:{
-        type: String,
-        enum: ['Male', 'Female', 'Other'],
+    gender: {
+        type: DataTypes.ENUM,
+        values: ['Male', 'Female', 'Other'],
+        allowNull: false,
     },
+    company:{
+        type: DataTypes.ENUM,
+        values: ['ThriveBrands', 'EcoSoul'],
+        allowNull: false,
+    }
 });
 
-const Employee = mongoose.model('Employee', employeeSchema);
-
-export default Employee;
+export default employee;

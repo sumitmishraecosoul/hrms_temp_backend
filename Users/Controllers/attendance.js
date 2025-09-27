@@ -1,61 +1,61 @@
-import All_Models from "../../Utils/All_Models.js";
+// import All_Models from "../../Utils/All_Models.js";
 
-const attendanceController = {}
+// const attendanceController = {}
 
-attendanceController.getAllAttendances = async (req, res) => {
-    try {
-        const attendances = await All_Models.Attendance.findAll();
-        res.status(200).json(attendances);
-    } catch (error) {
-        res.status(500).json({ message: "Error fetching attendances", error: error.message });
-    }
-};
+// attendanceController.getAllAttendances = async (req, res) => {
+//     try {
+//         const attendances = await All_Models.Attendance.findAll();
+//         res.status(200).json(attendances);
+//     } catch (error) {
+//         res.status(500).json({ message: "Error fetching attendances", error: error.message });
+//     }
+// };
 
-attendanceController.getAttendanceById = async (req, res) => {
-    try {
-        const { attendanceId } = req.query;
+// attendanceController.getAttendanceById = async (req, res) => {
+//     try {
+//         const { attendanceId } = req.query;
 
-        const attendance = await All_Models.Attendance.findOne({ attendanceId });
-        if (!attendance) {
-            return res.status(404).json({ message: "Attendance not found" });
-        }
-        res.status(200).json(attendance);
-    } catch (error) {
-        res.status(500).json({ message: "Error fetching attendance", error: error.message });
-    }
-};
+//         const attendance = await All_Models.Attendance.findOne({ attendanceId });
+//         if (!attendance) {
+//             return res.status(404).json({ message: "Attendance not found" });
+//         }
+//         res.status(200).json(attendance);
+//     } catch (error) {
+//         res.status(500).json({ message: "Error fetching attendance", error: error.message });
+//     }
+// };
 
-attendanceController.updateAttendance = async (req, res) => {
-    try {
-        const {
-            status,
-            punchIn,
-            punchOut,
-            date
-        } = req.body;
+// attendanceController.updateAttendance = async (req, res) => {
+//     try {
+//         const {
+//             status,
+//             punchIn,
+//             punchOut,
+//             date
+//         } = req.body;
 
-        const { attendanceId } = req.query;
-        if (!attendanceId) {
-            return res.status(400).json({ message: "attendanceId does not exist" });
-        }
-        const updatedAttendance = await All_Models.Attendance.findOneAndUpdate(
-            { attendanceId },
-            {
-                status,
-                punchIn,
-                punchOut,
-                date
-            },
-            { new: true }
-        );
-            if (!updatedAttendance) {
-            return res.status(404).json({ message: "Attendance not found" });
-        }
-        res.status(200).json(updatedAttendance);
-    } catch (error) {
-        res.status(500).json({ message: "Error updating attendance", error: error.message });
-    }
-};
+//         const { attendanceId } = req.query;
+//         if (!attendanceId) {
+//             return res.status(400).json({ message: "attendanceId does not exist" });
+//         }
+//         const updatedAttendance = await All_Models.Attendance.findOneAndUpdate(
+//             { attendanceId },
+//             {
+//                 status,
+//                 punchIn,
+//                 punchOut,
+//                 date
+//             },
+//             { new: true }
+//         );
+//             if (!updatedAttendance) {
+//             return res.status(404).json({ message: "Attendance not found" });
+//         }
+//         res.status(200).json(updatedAttendance);
+//     } catch (error) {
+//         res.status(500).json({ message: "Error updating attendance", error: error.message });
+//     }
+// };
 
 
-export default attendanceController;
+// export default attendanceController;

@@ -1,37 +1,31 @@
-import mongoose from 'mongoose';
+import { DataTypes } from 'sequelize';
+import sequelize from '../Utils/dbConnection.js';
 
-const attendanceSchema = new mongoose.Schema({
-    employeeId: {
-        type: String,
-        required: true,
-    },
+const attendance = sequelize.define('attendance', {
     name: {
-        type: String,
-        required: true,
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     status: {
-        type: String,
-        enum: ['Present', 'Absent'],
-        required: true,
+        type: DataTypes.ENUM,
+        values: ['Present', 'Absent'],
+        allowNull: false,
     },
     punchIn: {
-        type: Date,
+        type: DataTypes.TIME,
+        allowNull: false,
     },
     punchOut: {
-        type: Date,
+        type: DataTypes.TIME,
+        allowNull: false,
     },
     date: {
-        type: Date,
-        required: true, 
+        type: DataTypes.DATEONLY,
+        allowNull: false, 
     },
-    employee: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Employee"
-    }
 });
 
-const Attendance = mongoose.model('Attendance', attendanceSchema);
 
-export default Attendance;
+export default attendance;
 
 

@@ -1,16 +1,17 @@
-import mongoose from 'mongoose';
+import { Sequelize } from 'sequelize';
+import tedious from 'tedious';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const dbConnection = () => {
-    try {
-        mongoose.connect(process.env.MONGODB_URI, {
-        })
-        console.log('Connected to MongoDB');
-    } catch (error) {
-        console.log('Error connecting to MongoDB', error);
-    }
-}
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: process.env.DB_DIALECT,
+  port: process.env.DB_PORT,
+  dialectModule: tedious,
+  dialectOptions: {
+    encrypt: process.env.DB_ENCRYPT === 'true',
+  },
+});
 
-export default dbConnection;
+export default sequelize;

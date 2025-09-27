@@ -60,6 +60,10 @@ const router = express.Router();
  *                 type: string
  *                 description: The gender of the employee
  *                 example: "Male"
+ *               company:
+ *                 type: string
+ *                 description: The company of the employee
+ *                 example: "Thrive Brands"
  *     responses:
  *       201:
  *         description: Employee created successfully
@@ -136,6 +140,7 @@ router.get('/getEmployeeById', tokenVerify, employeeController.getEmployeeById);
  *               - dateOfJoining
  *               - biometricId
  *               - gender
+ *               - company
  *             properties:
  *               name:
  *                 type: string
@@ -165,6 +170,10 @@ router.get('/getEmployeeById', tokenVerify, employeeController.getEmployeeById);
  *                 type: string
  *                 description: The gender of the employee
  *                 example: "Male"
+ *               company:
+ *                 type: string
+ *                 description: The company of the employee
+ *                 example: "Thrive Brands"
  *     responses:
  *       200:
  *         description: Employee updated successfully

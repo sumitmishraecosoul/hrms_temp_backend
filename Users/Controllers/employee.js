@@ -5,25 +5,25 @@ const employeeController = {}
 employeeController.createEmployee = async (req, res) => {
     try {
         const {
-            employeeId,
             name,
             email,
             department,
             designation,
             dateOfJoining,
             biometricId,
-            gender
+            gender,
+            company
         } = req.body;
 
         const newEmployee = new All_Models.Employee({
-            employeeId,
             name,
             email,
             department,
             designation,
             dateOfJoining,
             biometricId,
-            gender
+            gender,
+            company
         });
 
         await newEmployee.save();
@@ -37,7 +37,7 @@ employeeController.createEmployee = async (req, res) => {
 
 employeeController.getAllEmployees = async (req, res) => {
     try {
-        const employees = await All_Models.Employee.find({});
+        const employees = await All_Models.Employee.findAll();
         res.status(200).json(employees);
     } catch (error) {
         res.status(500).json({ message: "Error fetching employees", error: error.message });
@@ -46,9 +46,9 @@ employeeController.getAllEmployees = async (req, res) => {
 
 employeeController.getEmployeeById = async (req, res) => {
     try {
-        const { employeeId } = req.query;
+        const { id } = req.query;
 
-        const employee = await All_Models.Employee.findOne({ employeeId });
+        const employee = await All_Models.Employee.findOne({ where: { id } });  
         if (!employee) {
             return res.status(404).json({ message: "Employee not found" });
         }
@@ -67,15 +67,16 @@ employeeController.updateEmployee = async (req, res) => {
             designation,
             dateOfJoining,
             biometricId,
-            gender
+            gender,
+            company
         } = req.body;
 
-        const { employeeId } = req.query;
+        const { id } = req.query;
         if (!employeeId) {
-            return res.status(400).json({ message: "employeeId does not exist" });
+            return res.status(400).json({ message: "id does not exist" });
         }
-        const updatedEmployee = await All_Models.Employee.findOneAndUpdate(
-            { employeeId },
+        const updatedEmployee = await All_Models.Employee.update(
+            { id },
             {
                 name,
                 email,
@@ -84,6 +85,7 @@ employeeController.updateEmployee = async (req, res) => {
                 dateOfJoining,
                 biometricId,
                 gender,
+                company
             },
             { new: true }
         );
@@ -98,9 +100,9 @@ employeeController.updateEmployee = async (req, res) => {
 
 employeeController.deleteEmployee = async (req, res) => {
     try {
-        const { employeeId } = req.query;
+        const { id } = req.query;
 
-        const deletedEmployee = await All_Models.Employee.findOneAndDelete({ employeeId });
+        const deletedEmployee = await All_Models.Employee.destroy({ where: { id } });
         if (!deletedEmployee) {
             return res.status(404).json({ message: "Employee not found" });
         }
