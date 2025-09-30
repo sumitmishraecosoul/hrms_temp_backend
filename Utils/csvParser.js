@@ -13,9 +13,9 @@ const csvParser = async (filePath) => {
                 return records;
             }
 
-            return [];
+            throw new Error(`Unsupported file format: ${ext}. Only CSV files are supported.`);
         } catch (error) {
-            return error;
+            throw new Error(`Error parsing CSV file: ${error.message}`);
         }
 }
 

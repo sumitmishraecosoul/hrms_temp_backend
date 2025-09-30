@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import sequelize from "./Utils/dbConnection.js";
 import cors from "cors";
+import All_Model_Relationships from "./Utils/All_Model_Relationships.js";
 
 
 
@@ -27,7 +28,7 @@ app.use(cors({
 }));
 
 
-All_Models;
+All_Model_Relationships();
 
 
 All_User_Routes(app);
