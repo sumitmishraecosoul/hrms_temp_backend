@@ -22,10 +22,10 @@ app.use(fileUpload());
 
 const PORT = process.env.PORT || 5010;
 
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-}));
+// app.use(cors({
+//     origin: "",
+//     credentials: true,
+// }));
 
 
 All_Model_Relationships();
