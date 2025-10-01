@@ -12,20 +12,23 @@ const employee = sequelize.define('employee', {
     },
     department: {
         type: DataTypes.ENUM,
-        values: ['IT', 'HR', 'Finance', 'Marketing', 'Sales', 'Engineering', 'Customer Support', 'Legal', 'Product', 'Design', 'Operations'],
+        values: ['Data Analytics', 'Human Resources and Administration', 'Finance & Accounts', 
+            'Digital Marketing', 'Supply Chain', 'New Product Design', 'Supply Chain-Operations', 
+            'Retail E-commerce', 'India E-commerce', 'E-commerce','Zonal Sales (India)- HORECA','Zonal Sales (India)','Zonal Sales'],
         allowNull: false,
     },
     designation: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    dateOfJoining: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
+    // dateOfJoining: {
+    //     type: DataTypes.DATE,
+    //     allowNull: false,
+    // },
     biometricId: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     gender: {
         type: DataTypes.ENUM,
@@ -36,7 +39,15 @@ const employee = sequelize.define('employee', {
         type: DataTypes.ENUM,
         values: ['ThriveBrands', 'EcoSoul'],
         allowNull: false,
-    }
+    },
+    dateOfBirth: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+    },
+    workAnniversary: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+    },
 });
 
 export default employee;

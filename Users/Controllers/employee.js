@@ -12,10 +12,11 @@ employeeController.createEmployee = async (req, res) => {
             email,
             department,
             designation,
-            dateOfJoining,
             biometricId,
             gender,
-            company
+            company,
+            dateOfBirth,
+            workAnniversary
         } = req.body;
 
         const newEmployee = new All_Models.Employee({
@@ -23,10 +24,11 @@ employeeController.createEmployee = async (req, res) => {
             email,
             department,
             designation,
-            dateOfJoining,
             biometricId,
             gender,
-            company
+            company,
+            dateOfBirth,
+            workAnniversary
         });
 
         await newEmployee.save();
@@ -74,10 +76,11 @@ employeeController.updateEmployee = async (req, res) => {
             email,
             department,
             designation,
-            dateOfJoining,
             biometricId,
             gender,
-            company
+            company,
+            dateOfBirth,
+            workAnniversary
         } = req.body;
 
         const { id } = req.query;
@@ -90,10 +93,11 @@ employeeController.updateEmployee = async (req, res) => {
                 email,
                 department,
                 designation,
-                dateOfJoining,
                 biometricId,
                 gender,
-                company
+                company,
+                dateOfBirth,
+                workAnniversary
             },
             {
                 where: { id }
@@ -154,10 +158,11 @@ employeeController.uploadEmployeeSheet = async (req, res) => {
             email: row.email || row.Email || row['E-mail'] || "",
             department: row.department || row.Department || row['Department'] || "",
             designation: row.designation || row.Designation || row['Designation'] || "",
-            dateOfJoining: row.dateOfJoining || row.DateOfJoining || row['DateOfJoining'] || "",
             biometricId: row.biometricId || row.BiometricId || row['BiometricId'] || "",
             gender: row.gender || row.Gender || row['Gender'] || "",
-            company: row.company || row.Company || row['Company'] || ""
+            company: row.company || row.Company || row['Company'] || "",
+            dateOfBirth: row.dateOfBirth || row.DateOfBirth || row['DateOfBirth'] || "",
+            workAnniversary: row.workAnniversary || row.WorkAnniversary || row['WorkAnniversary'] || ""
         }));
 
         const createdEmployees = await All_Models.Employee.bulkCreate(mappedEmployees);

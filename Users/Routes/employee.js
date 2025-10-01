@@ -19,19 +19,16 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - id
  *               - name
  *               - email
  *               - department
  *               - designation
- *               - dateOfJoining
  *               - biometricId
  *               - gender
+ *               - company
+ *               - dateOfBirth
+ *               - workAnniversary
  *             properties:
- *               id:
- *                 type: integer
- *                 description: The id of the employee
- *                 example: 123456
  *               name:
  *                 type: string
  *                 description: The name of the employee
@@ -40,7 +37,7 @@ const router = express.Router();
  *                 type: string
  *                 description: The email of the employee
  *                 example: "john.doe@example.com"
-*               department:
+ *               department:
  *                 type: string
  *                 description: The department of the employee
  *                 example: "IT"
@@ -48,10 +45,7 @@ const router = express.Router();
  *                 type: string
  *                 description: The designation of the employee
  *                 example: "Software Engineer"
- *               dateOfJoining:
- *                 type: string
- *                 description: The date of joining of the employee
- *                 example: "2021-01-01"
+ 
  *               biometricId:
  *                 type: string
  *                 description: The biometric id of the employee
@@ -64,6 +58,10 @@ const router = express.Router();
  *                 type: string
  *                 description: The company of the employee
  *                 example: "Thrive Brands"
+ *               workAnniversary:
+ *                 type: string
+ *                 description: The work anniversary of the employee (YYYY-MM-DD)
+ *                 example: "2021-01-01"
  *     responses:
  *       201:
  *         description: Employee created successfully
@@ -137,10 +135,11 @@ router.get('/getEmployeeById', employeeController.getEmployeeById);
  *               - email
  *               - department
  *               - designation
- *               - dateOfJoining
  *               - biometricId
  *               - gender
  *               - company
+ *               - dateOfBirth
+ *               - workAnniversary
  *             properties:
  *               name:
  *                 type: string
@@ -154,14 +153,10 @@ router.get('/getEmployeeById', employeeController.getEmployeeById);
  *                 type: string
  *                 description: The department of the employee
  *                 example: "IT"
- *               designation:
- *                 type: string
- *                 description: The designation of the employee
- *                 example: "Software Engineer"
- *               dateOfJoining:
- *                 type: string
- *                 description: The date of joining of the employee
- *                 example: "2021-01-01"
+*               designation:
+*                 type: string
+*                 description: The designation of the employee
+*                 example: "Software Engineer"
  *               biometricId:
  *                 type: string
  *                 description: The biometric id of the employee
@@ -174,6 +169,14 @@ router.get('/getEmployeeById', employeeController.getEmployeeById);
  *                 type: string
  *                 description: The company of the employee
  *                 example: "Thrive Brands"
+ *               dateOfBirth:
+ *                 type: string
+ *                 description: The date of birth of the employee (YYYY-MM-DD)
+ *                 example: "2021-01-01"
+ *               workAnniversary:
+ *                 type: string
+ *                 description: The work anniversary of the employee (YYYY-MM-DD)
+ *                 example: "2021-01-01"
  *     responses:
  *       200:
  *         description: Employee updated successfully
@@ -224,7 +227,7 @@ router.delete('/deleteEmployee', employeeController.deleteEmployee);
  *               file:
  *                 type: string
  *                 format: binary
- *                 description: CSV file containing employee data with columns (name, email, department, designation, dateOfJoining, biometricId, gender, company)
+ *                 description: CSV file containing employee data with columns (name, email, department, designation, biometricId, gender, company)
  *                 example: "employee_data.csv"
  *     responses:
  *       200:
