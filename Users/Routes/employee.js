@@ -45,7 +45,6 @@ const router = express.Router();
  *                 type: string
  *                 description: The designation of the employee
  *                 example: "Software Engineer"
- 
  *               biometricId:
  *                 type: string
  *                 description: The biometric id of the employee
@@ -58,6 +57,10 @@ const router = express.Router();
  *                 type: string
  *                 description: The company of the employee
  *                 example: "Thrive Brands"
+ *               dateOfBirth:
+ *                 type: string
+ *                 description: The date of birth of the employee (YYYY-MM-DD)
+ *                 example: "2021-01-01"
  *               workAnniversary:
  *                 type: string
  *                 description: The work anniversary of the employee (YYYY-MM-DD)
